@@ -4,31 +4,29 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-typedef struct book
-{
+typedef struct book{
     int id;
-    char* name;
+    char *name;
     int num_pages;
     int pub_year;
 } book;
 
 // basic node structure
-typedef struct __node_t
-{
-    book* libro;
+typedef struct __node_t{
+    book libro;
     struct __node_t *next;
 } node_t;
 // basic list structure (one used per list)
 
-typedef struct __list_t
-{
+typedef struct __list_t{
     node_t *head;
+    node_t *last;
     pthread_mutex_t lock;
-} list_t;
+}list_t;
 
 void List_Init(list_t *L);
 
-void List_Insert(list_t *L, book* bk);
+void List_Insert(list_t *L, book bk);
 
 int List_Lookup(list_t *L, int key);
 

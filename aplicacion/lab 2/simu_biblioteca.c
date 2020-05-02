@@ -13,21 +13,17 @@ list_t books;
 // code here (if you required it)...
 pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
 
-int main(int argc, char *argv[]) { 
-
+int main(int argc, char *argv[]){
     List_Init(&books);
-    for(int i=0;i<100;i++){
-        char tmp1[50];
+    for(int i = 0; i < 100; i++){
+        char tmp1[50] = "";
+        char *tmp2 = malloc(sizeof(char)*50);
+        strcpy(tmp2, "book_");
         snprintf(tmp1, 50, "%d", i);
-        char temp2[50] = "book_";
-        strcat(temp2,tmp1);
-        book bk={i,temp2,100,2020};
-        List_Insert(&books,&bk);
+        strcat(tmp2,tmp1);
+        book bk = {i,tmp2,100,2020};
+        List_Insert(&books,bk);
     }
-    node_t *curr = books.head;
-    while (curr != NULL){
-        printf("id: %d, name: %s, n pag: %d, año: %d\n",curr->libro->id,curr->libro->name,curr->libro->num_pages,curr->libro->pub_year);
-        curr = curr->next;
-    }
+    List_Print(&books);
     return 0;
 }
