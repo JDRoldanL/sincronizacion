@@ -20,7 +20,6 @@ typedef struct __node_t{
 
 typedef struct __list_t{
     node_t *head;
-    node_t *last;
     pthread_mutex_t lock;
 }list_t;
 
@@ -33,5 +32,7 @@ int List_Lookup(list_t *L, int key);
 int List_Delete(list_t *L, int key);
 
 void List_Print(list_t *L);
+
+int List_Available(list_t *L);
 
 #endif

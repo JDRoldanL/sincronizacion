@@ -5,7 +5,6 @@
 
 void List_Init(list_t *L){
     L->head = NULL;
-    L->last = NULL;
     pthread_mutex_init(&L->lock, NULL);
 }
 
@@ -19,13 +18,8 @@ void List_Insert(list_t *L, book bk){
     new->libro = bk;
     // just lock critical section
     pthread_mutex_lock(&L->lock);
-    if(L->head == NULL){
-        L->head = new;
-        L->last = new;
-    }else{
-        L->last->next = new;
-        L->last = new;
-    }
+    new->next = L->head;
+    L->head = new;
     pthread_mutex_unlock(&L->lock);
 }
 
@@ -37,4 +31,44 @@ void List_Print(list_t *L){
         curr = curr->next;
     }
     pthread_mutex_unlock(&L->lock);
+}
+
+int List_Delete(list_t *L, int key){
+
+    int rv = -1;
+
+    pthread_mutex_lock(&L->lock);
+    node_t *prev = NULL;
+    node_t *curr = L->head;
+
+    if( (curr == L->head) && (curr->libro.id == key) ){
+        L->head=L->head->next;
+        rv = 0;
+    }
+
+    prev = curr;
+    curr = curr->next;
+
+    while (curr && rv==-1){
+        if (curr->libro.id == key){
+            prev->next = curr->next;
+            rv = 0;
+            break;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    pthread_mutex_unlock(&L->lock);
+    return rv; // now both success and failure
+}
+
+
+int List_Available(list_t *L){
+    int availables = 0;
+    node_t *t = L->head;
+    while (t != NULL){
+        availables++;
+        t = t->next;
+    }
+    return availables;
 }
