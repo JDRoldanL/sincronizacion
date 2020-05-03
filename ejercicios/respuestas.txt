@@ -1,1 +1,16 @@
+5. 
+¿Los valores que usted obtuvo siguen una tendencia como la que se muestra en el texto guía (mostrada anteriormente)?
+- Los valores obtenidos para el contador preciso siguen una tendencia similar a los observados en la gráfica, no obstante 
+la tendecia de los valores del contador aproximado difiere ampliamente de aquellos mostrador en la gráfica. 
 
+¿Cuántas CPUs hay disponibles en el sistema que usted está utilizando?
+- 4 CPU
+
+¿Este número afecta de alguna manera sus mediciones?
+- No afecta la tendencia de los datos debido a que es el mismo número de CPU con el que se generaron los datos de la gráfica.
+
+
+6.
+¿La gráfica sigue una tendencia similar a la mostrada en la figura 29.6 del texto guía (la cual se muestra a continuación)?
+
+- No, el tiempo de ejecución se mantuvo constante para todos los tamaños del Threshold.
